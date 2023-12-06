@@ -1,1 +1,22 @@
-<p>add-user works!</p>
+<div class="d-flex">
+    <div style="height: 91vh; width: 160px;" class="sidebar bg-danger text-light p-3 d-flex flex-column mt-1">
+        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white; letter-spacing: 1px;" routerLink="/dashboard">Home</a>
+        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white;letter-spacing: 1px" routerLink="/users">Users</a>
+    </div>
+    <div class="dashboard p-3 w-100 d-flex flex-column align-items-center justify-content-center">
+        <h2>Add/Edit User</h2>
+        <div class="p-5 w-50 shadow mt-3">
+            <form>
+                <input type="text" class="form-control mb-3" placeholder="User ID">
+                <input type="text" class="form-control mb-3" placeholder="Username">
+                <input type="text" class="form-control mb-3" placeholder="Email">
+                <input type="text" class="form-control mb-3" placeholder="Status">
+    
+                <div class="d-flex justify-content-end pt-3">
+                    <button class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-success ms-3">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
