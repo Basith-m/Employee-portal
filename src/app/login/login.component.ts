@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AdminAPIService } from '../services/admin-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +10,27 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   email:string=""
   password:string=""
+  constructor(private api:AdminAPIService,private router:Router){}
 
   login(){
     if(this.email && this.password){
-      alert("Proceed to login")
+      this.api.authenticate().subscribe({
+        next:(res:any)=>{
+          // console.log(res);
+          const {email,password} = res
+          if(email===this.email && password===this.password){
+            alert("Login Successful"); 
+            this.router.navigateByUrl("dashboard")
+          }
+          else{
+            alert("Invalid Email/Password")    
+          }   
+        },
+        error:(res:any)=>{
+          // console.log(res);  
+          alert(res.meassage)
+        }
+      })
     }else{
       alert("Please fill the form")
     }

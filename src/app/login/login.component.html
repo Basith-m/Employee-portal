@@ -5,23 +5,31 @@
         </div>
         <div class="col-sm-12 col-md-4 p-3">
             <form #loginForm="ngForm" class="p-5 d-flex flex-column align-items-between" (ngSubmit)="login()">
-                <input type="text" class="form-control mb-2" placeholder="Username" name="email" [(ngModel)]="email" email required #inputEmail="ngModel">
+                <h3 class="fw-bolder mb-5">Login Form</h3>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" name="email" [(ngModel)]="email" email required #inputEmail="ngModel" placeholder="name@example.com">
+                    <label for="floatingInput">Email Address</label>
+    
+                    <!-- invalid email -->
+                    <div 
+                    *ngIf="inputEmail.invalid && inputEmail.touched" class="mb-2 text-danger fw-bolder">
+                        Invalid Email
+                    </div>
 
-                <!-- invalid email -->
-                <div 
-                *ngIf="inputEmail.invalid && inputEmail.touched" class="mb-3 text-danger fw-bolder">
-                    Invalid Email
                 </div>
 
-                <input type="password" class="form-control mb-2" placeholder="Password" name="password" [(ngModel)]="password" required pattern="[a-zA-Z0-9]*" minlength="4" #inputPassword="ngModel">
-
-                <!-- invalid password -->
-                <div 
-                *ngIf="inputPassword.invalid && inputPassword.touched" class="mb-3 text-danger fw-bolder">
-                    Invalid password
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control mb-2" id="floatingPassword" placeholder="Password" name="password" [(ngModel)]="password" required pattern="[a-zA-Z0-9]*" minlength="4" #inputPassword="ngModel">
+                    <label for="floatingPassword">Password</label>
+    
+                    <!-- invalid password -->
+                    <div 
+                    *ngIf="inputPassword.invalid && inputPassword.touched" class="mb-3 text-danger fw-bolder">
+                        Invalid password
+                    </div>
                 </div>
 
-                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-success mt-2 w-100 mb-2">Login</button>
+                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary w-100">Login</button>
             </form>
         </div>
     </div>
