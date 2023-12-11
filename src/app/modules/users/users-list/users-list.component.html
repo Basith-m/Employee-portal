@@ -1,41 +1,89 @@
 <div class="d-flex">
-    <div style="height: 91vh; width: 160px;" class="sidebar bg-danger text-light p-3 d-flex flex-column mt-1">
-        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white; letter-spacing: 1px;" routerLink="/dashboard">Home</a>
-        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white;letter-spacing: 1px" routerLink="/users">Users</a>
+  <div
+    style="height: 91vh; width: 160px"
+    class="sidebar bg-danger text-light p-3 d-flex flex-column mt-1"
+  >
+    <a
+      style="
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+      "
+      routerLink="/dashboard"
+      >Home</a
+    >
+    <a
+      style="
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+      "
+      routerLink="/users"
+      >Users</a
+    >
+  </div>
+
+  <div class="dashboard p-3 w-100">
+    <div class="d-flex align-items-center justify-content-between px-5 pt-4 pb-2 mb-3">
+      <h2 style="font-weight: 600; letter-spacing: 1px">Users</h2>
+      <a routerLink="add" class="btn btn-warning fw-bolder">
+        <i class="fa-solid fa-user-plus"></i>
+        New User</a
+      >
     </div>
-    <div class="dashboard p-3 w-100">
-        <div class="d-flex align-items-center justify-content-between p-5">
-            <h2 style="font-weight: 600; letter-spacing: 1px;">Users</h2>
-            <a routerLink="add" class="btn btn-warning fw-bolder">
-                <i class="fa-solid fa-user-plus"></i>
-                New User</a>
-        </div>
-        <div style="overflow-y: auto;" class="px-5">
-            <table class="table border shadow">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of allUsers" [hidden]="user.id=='1'">
-                        <td>{{user.id}}</td>
-                        <td>{{user.name}}</td>
-                        <td>{{user.email}}</td>
-                        <td><span style="width: 80px;" [ngClass]="user.active=='1'?'btn btn-success':'btn btn-warning'">{{user.active=="1"?"Active":"Inactive"}}</span></td>
-                        <td>
-                            <!-- edit -->
-                            <a routerLink="edit/{{user.id}}"><i class="fa-solid fa-pen fs-5"></i></a>
-                            <!-- delete -->
-                            <i (click)="deleteUser(user.id)" class="fa-solid fa-trash text-danger ms-4 fs-5"></i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+
+    <div class="container ms-5 w-100 d-flex align-items-center justify-content-start mb-3">
+      <span>Search : </span>
+      <input
+        type="text"
+        class="form-control w-50 ms-2"
+        placeholder="Search By User name"
+      />
     </div>
+
+    <div style="overflow-y: auto" class="px-5">
+      <table class="table border shadow">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUsers | search : 'kh' "  [hidden]="user.id == '1'">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <span
+                style="width: 80px"
+                [ngClass]="
+                  user.active == '1' ? 'btn btn-success' : 'btn btn-warning'
+                "
+                >{{ user.active == "1" ? "Active" : "Inactive" }}</span
+              >
+            </td>
+            <td>
+              <!-- edit -->
+              <a routerLink="edit/{{ user.id }}"
+                ><i class="fa-solid fa-pen fs-5"></i
+              ></a>
+              <!-- delete -->
+              <i
+                (click)="deleteUser(user.id)"
+                class="fa-solid fa-trash text-danger ms-4 fs-5"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
