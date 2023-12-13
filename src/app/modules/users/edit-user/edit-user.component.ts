@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UserApiService } from '../user-api.service';
 import { UserModel } from '../users.model';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -10,7 +11,7 @@ import { UserModel } from '../users.model';
 })
 export class EditUserComponent implements OnInit {
   user: UserModel = {};
-  constructor(private route: ActivatedRoute, private api: UserApiService, private router:Router) {}
+  constructor(private route: ActivatedRoute, private api: UserApiService, private router:Router, private toaster:ToasterService) {}
   ngOnInit(): void {
     this.route.params.subscribe((res: any) => {
       console.log(res);
@@ -33,11 +34,11 @@ export class EditUserComponent implements OnInit {
     this.api.updateUserAPI(id,this.user).subscribe({
       next:(res:any) => {
         console.log(res);
-        alert("User Update Successfully...");
+        this.toaster.showSuccess("User Update Successfully...");
         this.router.navigateByUrl('/users')
       } ,
       error:(err:any) => {
-        alert(err.error)
+        this.toaster.showError(err.error)
       }
     })
   }

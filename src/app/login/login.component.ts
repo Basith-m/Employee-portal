@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AdminAPIService } from '../services/admin-api.service';
 import { Router } from '@angular/router';
+import { AdminAPIService } from '../services/admin-api.service';
 
 @Component({
   selector: 'app-login',

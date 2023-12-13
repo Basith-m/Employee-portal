@@ -27,26 +27,51 @@
     >
   </div>
 
-  <div class="dashboard p-3 w-100">
-    <div class="d-flex align-items-center justify-content-between px-5 pt-4 pb-2 mb-3">
-      <h2 style="font-weight: 600; letter-spacing: 1px">Users</h2>
+  <div class="dashboard  w-100">
+    <div
+      class="d-flex align-items-center justify-content-between px-5 pt-4 pb-2 mb-3"
+    >
+      <h1 style="font-weight: 600; letter-spacing: 1px">Users</h1>
       <a routerLink="add" class="btn btn-warning fw-bolder">
         <i class="fa-solid fa-user-plus"></i>
         New User</a
       >
     </div>
 
-    <div class="container ms-5 w-100 d-flex align-items-center justify-content-start mb-3">
-      <span>Search : </span>
-      <input
-        type="text"
-        class="form-control w-50 ms-2"
-        placeholder="Search By User name"
-      />
+    <div
+      class="container ms-5  d-flex align-items-center justify-content-between mb-3"
+    >
+      <div class="d-flex align-items-center justify-content-center">
+        <span>Search : </span>
+        <input
+          type="text"
+          class="form-control w-50 ms-2"
+          placeholder="Search By User name"
+          [(ngModel)]="searchKey"
+        />
+  
+        <div class="ms-3">
+          <button
+            class="btn btn-secondary"
+            mat-button
+            [matMenuTriggerFor]="menu"
+          >
+            Sort
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="sortById()" mat-menu-item>By UserId</button>
+            <button (click)="sortByName()" mat-menu-item>By Username</button>
+          </mat-menu>
+        </div> 
+      </div>
+
+      <div class="me-5 pe-5 ms-2">
+        <button (click)="generatePdf()" class="btn btn-primary">Export</button>
+      </div>
     </div>
 
-    <div style="overflow-y: auto" class="px-5">
-      <table class="table border shadow">
+    <div style="overflow-y: auto" class="px-5 d-flex align-items-center justify-content-center flex-column">
+      <table class="table border shadow mt-4 mb-4">
         <thead>
           <tr>
             <th>User ID</th>
@@ -57,7 +82,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of allUsers | search : 'kh' "  [hidden]="user.id == '1'">
+          <tr
+            *ngFor="let user of allUsers | search : searchKey | paginate: { itemsPerPage: 5, currentPage: p }"
+            [hidden]="user.id == '1'"
+          >
             <td>{{ user.id }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
@@ -82,8 +110,14 @@
               ></i>
             </td>
           </tr>
+          <tr *ngIf="(allUsers | search : searchKey).length === 0">
+            <p class="fw-bolder text-danger">User does not exist!!!</p>
+          </tr>
         </tbody>
       </table>
+
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
     </div>
   </div>
 </div>

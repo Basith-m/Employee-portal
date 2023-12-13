@@ -8,7 +8,8 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { SearchPipe } from './search.pipe';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule,
+    NgxPaginationModule
   ]
 })
 export class UsersModule { }
