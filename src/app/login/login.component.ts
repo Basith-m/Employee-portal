@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminAPIService } from '../services/admin-api.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AdminAPIService } from '../services/admin-api.service';
 export class LoginComponent {
   email:string=""
   password:string=""
-  constructor(private api:AdminAPIService,private router:Router){}
+  constructor(private api:AdminAPIService,private router:Router, private toaster:ToasterService){}
 
   login(){
     if(this.email && this.password){
@@ -19,11 +20,14 @@ export class LoginComponent {
           // console.log(res);
           const {email,password} = res
           if(email===this.email && password===this.password){
-            alert("Login Successful"); 
+            // save admin details
+            localStorage.setItem("admin_name",res.name)
+            localStorage.setItem("admin_pswd",res.password)
+            this.toaster.showSuccess("Login Successful"); 
             this.router.navigateByUrl("dashboard")
           }
           else{
-            alert("Invalid Email/Password")    
+            this.toaster.showError("Invalid Email/Password")    
           }   
         },
         error:(res:any)=>{

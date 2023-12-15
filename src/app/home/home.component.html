@@ -1,32 +1,85 @@
 <div class="d-flex">
-    <div style="height: 91vh; width: 160px;" class="sidebar bg-danger text-light p-3 d-flex flex-column mt-1">
-        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white; letter-spacing: 1px;" routerLink="/dashboard">Home</a>
-        <a style="text-decoration: none; margin-top: 10px; font-weight: bold;color: white;letter-spacing: 1px" routerLink="/users">Users</a>
-    </div>
-    <div class="dashboard p-3 w-100">
-        <div class="row">
-            <div class="col-lg-8">
-                <div style="height: 180px; background-image: url('https://www.energy.gov/sites/default/files/2023-09/Earthshots-webbanner.png');" class="admin-banner rounded d-flex align-items-center shadow">
-                    <h1 class="ms-5 fw-bolder d-flex align-items-center text-light fs-2"><i class="fa-solid fa-bars me-3"></i> Welcome Admin</h1>
-                </div>
-                <div class="row m-3">
-                    <div class="col-lg-5 border rouded shadow">
-                        Calender
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-6 border rouded shadow">
-                        Chart
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div style="height: 400px; background-color: rgb(215, 118, 0);" class="edit-admin border rounded shadow p-2 text-light">
-                    edit admin
-                </div>
-                <div style="height: 150px;" class="border rounded shadow p-2 bg-primary text-light d-flex align-items-center justify-content-center">
-                    <h2><i class="fa-solid fa-users me-3"></i> Employees : 12</h2>
-                </div>
-            </div>
+  <div 
+    *ngIf="showSidebar"
+    style="height: 91vh; width: 160px"
+    class="sidebar bg-danger text-light p-3 d-flex flex-column mt-1"
+  >
+    <a
+      style="
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+      "
+      routerLink="/dashboard"
+      >Home</a
+    >
+    <a
+      style="
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+      "
+      routerLink="/users"
+      >Users</a
+    >
+
+    <button style="letter-spacing: 1.4px;" (click)="logout()" class="btn btn-outline-info mt-auto fw-bold fs-5">Logout</button>
+
+  </div>
+  <div class="dashboard p-3 w-100">
+    <div class="row">
+      <div class="col-lg-8">
+        <div
+          style="
+            height: 180px;
+            background-image: url('https://www.energy.gov/sites/default/files/2023-09/Earthshots-webbanner.png');
+          "
+          class="admin-banner rounded d-flex align-items-center shadow"
+        >
+          <h1
+            style="letter-spacing: 1px"
+            class="ms-5 fw-bolder d-flex align-items-center text-light fs-2"
+          >
+            <i style="cursor: poi;" class="fa-solid fa-bars me-3" (click)="menuClick()"></i> Welcome {{admin_name}}
+          </h1>
         </div>
+        <div class="row m-3">
+          <div class="col-lg-5 border rounded shadow p-2">
+            <h1>Calender</h1>
+            <mat-card class="demo-inline-calendar-card">
+              <mat-calendar [(selected)]="selected"></mat-calendar>
+            </mat-card>
+          </div>
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6 border rounded shadow p-2">
+            <app-chart></app-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div
+          style="height: 450px; background-color: rgb(215, 118, 0)"
+          class="edit-admin border rounded shadow p-2 text-light"
+        >
+          edit admin
+        </div>
+        <div style="height: 25px;"></div>
+        <div
+          style="
+            height: 150px;
+            background-image: url('https://www.energy.gov/sites/default/files/2023-09/Earthshots-webbanner.png');
+          "
+          class="border rounded shadow p-2 text-light d-flex align-items-center justify-content-center"
+        >
+          <h2 style="letter-spacing: 1.3px" class="fw-bolder">
+            <i class="fa-solid fa-users me-3"></i> Employees : {{employeeCount}}
+          </h2>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
