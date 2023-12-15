@@ -13,4 +13,9 @@ export class AdminAPIService {
     // api-call - http://localhost:3000/users/1
     return this.http.get(`${this.SERVER_URL}/users/1`)
   }
+
+  //  update admin
+  updateAdmin(admin:any){
+    return this.http.put(`${this.SERVER_URL}/users/1`,admin)
+  }
 }

@@ -65,7 +65,7 @@
           style="height: 450px; background-color: rgb(215, 118, 0)"
           class="edit-admin border rounded shadow p-2 text-light"
         >
-          edit admin
+          <app-update-admin (onAdminChange)="getUpdatedAdmin($event)"></app-update-admin>
         </div>
         <div style="height: 25px;"></div>
         <div
